@@ -44,3 +44,41 @@ rake db:migrate
 ###
 rails generate scaffold Article title:string post:text user_id: integer
 
+###agregar validaciones
+    class User < ActiveRecord::Base
+        validates :password, presence: true,
+                    length: { minimum: 8}
+        validates :email, presence: true
+        
+    end
+
+    class Article < ActiveRecord::Base
+        validates :title, presence: true,
+                    length: {maximum: 50}
+        validates :post, presence: true               
+                    
+    end
+
+###agregar has_many belongs_to
+    class User < ActiveRecord::Base
+        has_many :articles
+
+    end
+
+    class Article < ActiveRecord::Base
+        belongs_to :article
+           
+    end
+
+###create comment model
+rails generate model Comment commenter:string body:text article:references
+rake db:migrate
+
+###nest comment inside articles
+
+    #file: routes.rb
+      resources :articles do
+        resources :comments
+      end
+
+
