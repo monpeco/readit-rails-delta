@@ -81,4 +81,8 @@ rake db:migrate
         resources :comments
       end
 
+###generate controller
+rails generate controller Comments
 
+#in case of delete al controller
+rails destroy controller Comments
